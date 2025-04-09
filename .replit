@@ -13,6 +13,18 @@ mode = "sequential"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
+args = "rabbitmq-server &"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "sleep 10"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "python RFID_scanning_service/app.py &"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
 args = "python run_scenario2.py"
 
 [[ports]]
@@ -22,6 +34,10 @@ externalPort = 80
 [[ports]]
 localPort = 5006
 externalPort = 3001
+
+[[ports]]
+localPort = 5012
+externalPort = 6000
 
 [[ports]]
 localPort = 5014

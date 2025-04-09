@@ -6,3 +6,5 @@ APScheduler==3.11.0
 requests==2.31.0
 stripe
 python-dotenv
+pika
+rabbitmq-server
