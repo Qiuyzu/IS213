@@ -18,3 +18,31 @@ args = "python run_scenario2.py"
 [[ports]]
 localPort = 5000
 externalPort = 80
+
+[[ports]]
+localPort = 5006
+externalPort = 3001
+
+[[ports]]
+localPort = 5014
+externalPort = 4200
+
+[[ports]]
+localPort = 5015
+externalPort = 3003
+
+[[ports]]
+localPort = 5016
+externalPort = 3000
+
+[[ports]]
+localPort = 5017
+externalPort = 5000
+
+[[ports]]
+localPort = 5018
+externalPort = 3002
+
+[[ports]]
+localPort = 5019
+externalPort = 5173
