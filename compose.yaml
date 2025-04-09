@@ -36,7 +36,7 @@ services:
       dockerfile: Dockerfile  # Ensure you have a Dockerfile for the Flask app
     container_name: flask-app
     ports:
-      - "5000:5000"
+      - "5011:5000"
     environment:
       - FLASK_ENV=development
       - MENU_SERVICE_URL=http://host.docker.internal:5002
