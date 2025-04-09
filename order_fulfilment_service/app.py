@@ -81,6 +81,19 @@ def create_order():
             db.session.commit()
      
             
+            # Trigger RFID scanning for ingredients
+            rfid_url = f"{os.getenv('RFID_SERVICE_URL', 'http://host.docker.internal:5012')}/rfid/scan"
+            
+            # Extract ingredient IDs from menu items
+            for menu_item in menu_item_ids:
+                payload = {
+                    "ingredient_id": menu_item["MenuItemID"],  # Assuming this maps to ingredient ID
+                    "quantity_used": menu_item.get("quantity", 1)  # Default to 1 if not specified
+                }
+                rfid_response = requests.post(rfid_url, json=payload)
+                if rfid_response.status_code != 200:
+                    print(f"RFID scan failed for ingredient {menu_item['MenuItemID']}")
+
             # Invoke Kitchen Station Service to assign the task
             kitchen_station_url = f"{KITCHEN_SERVICE_URL}/kitchen/assign"
             payload = {
@@ -90,7 +103,7 @@ def create_order():
             response = requests.post(kitchen_station_url, json=payload)
 
             if response.status_code == 201:
-                return jsonify({"message": "Order created and task assigned successfully", "order_id": new_order.OrderID}), 201
+                return jsonify({"message": "Order created, RFID triggered, and task assigned successfully", "order_id": new_order.OrderID}), 201
             else:
                 return jsonify({"message": "Order created but failed to assign task", "order_id": new_order.OrderID}), 500
         else:
