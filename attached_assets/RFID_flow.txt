@@ -1,0 +1,11 @@
+[Frontend] 
+   ↓
+[Order Fulfillment Service]
+   ├─> [Order Service]
+   ├─> [Kitchen Station Service]
+   └─> [RFID Scanning Service] --(HTTP POST)-->
+         └─> (AMQP event)
+             ↓
+         [Inventory Service] --(AMQP if needed)-->
+             ↓
+         [Restocking Service] --> [Suppliers]
